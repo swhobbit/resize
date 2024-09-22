@@ -14,9 +14,7 @@ resize
 `resize` prints on its standard output the TERM and TERMCAP commands
 for the C-shell of the current size of a window. It is never executed
 directly by the user, but should be aliased similarly to
-`tset`
-
-to cause the C-shell to execute the commands.
+`tset` to cause the C-shell to execute the commands.
 
 ### Example
 
