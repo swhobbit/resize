@@ -52,7 +52,12 @@ size (usually 80x24) on a vintage system which does not the
 propagate window change signal (`SIGWINCH`),
 resize should be run in `.login`.
 
-Likewise, if the user resizes the terminal window on a vintage system, resize must be run again.
+Likewise, if the user resizes the terminal window on a vintage system, resize must be run again. Aliases can run resize automatically prior to select full screen programs:
+```csh
+alias   more    'eval `resize` ; "more" '
+alias	less	'eval `resize` ; "less" '
+alias	vi	'eval `resize` ; "vi" '
+```
 
 The vintage `vi` editor often defaults to a small window size
 inappropriate for fast network connected terminals. 
