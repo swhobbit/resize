@@ -47,28 +47,34 @@ See the [full text of the copyright](mit-copyright.h).
 Ought to be able to generate the strings for the Bourne shell.
 
 If at user login, the terminal window is not the default defined size
-(usually 80x24) on a vintage system which does not the propagate window
-change signal (`SIGWINCH`), resize should be run in `.login`.
+(usually 80x24) on a vintage system which does not check the actual
+window size, `resize` should be run in `.login`.
 
-Likewise, if after login the user resizes the terminal window on a vintage
-system, resize must be run again. Aliases can run perform this resize
-automatically prior to select full screen programs:
+Likewise, if after login the user changes the terminal window size on a
+vintage system, `resize` must be run again. Aliases can run perform this
+`resize` automatically prior to select full screen programs:
 
 ```csh
-alias   more    'eval `resize` ; "more" '
 alias   less    'eval `resize` ; "less" '
+alias   man     'eval `resize` ; "man" '
+alias   more    'eval `resize` ; "more" '
 alias   vi      'eval `resize` ; "vi" '
 ```
 
-The vintage `vi` editor often defaults to a small window size
-inappropriate for fast network connected terminals.  It can be helpful
-to modify `.exrc` to force a full screen window:
+**Note**: Changing the window size once a command is running won't be
+seen by the program. You must exit the program, run `resize`, and restart
+the program.
+
+The vintage `vi` editor may default to a small window size inappropriate
+for fast network connected terminals.  It can be helpful to modify
+`.exrc` to force a full screen window:
 
 ```vi
 set window=99
 ```
+(*Hey, the last of the hardcopy TTYs running at 10 CPS still shattered
+the quiet of terminal rooms when `ex` and vi were written. Small windows were useful ... once.*)
 
-Modern UNIX/BSD/Linux systems generally propagate the window
-change signal; full screen programs (like editors, pagers and
-games) then handle it properly. Using resize is never required
-on such systems.
+Modern UNIX/BSD/Linux systems generally propagate the window change
+signal; full screen programs (like editors, pagers and games) then handle
+it properly. Using `resize` is not required on such systems.
